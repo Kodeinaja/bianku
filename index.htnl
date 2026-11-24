@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jastipinbian - Jastip Mie Gacoan Area Omben</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            yellow: '#FACC15',      // Yellow 400
+                            brightyellow: '#EAB308',// Yellow 500
+                            darkyellow: '#CA8A04',  // Yellow 600
+                            lightyellow: '#FEF9C3', // Yellow 100
+                            green: '#16A34A',       // Green 600
+                            darkgreen: '#15803D',   // Green 700
+                            lightgreen: '#DCFCE7',  // Green 100
+                            accentgreen: '#22C55E'  // Green 500
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #16A34A;
+            border-radius: 10px;
+        }
+        .pulse-btn {
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(22, 163, 74, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0); }
+        }
+    </style>
+</head>
+<body class="bg-amber-50/50 text-gray-800 font-sans antialiased flex flex-col min-h-screen pb-20 lg:pb-0">
+
+    <!-- Announcement Bar -->
+    <div class="bg-brand-darkgreen text-brand-lightyellow text-xs md:text-sm py-2 px-4 text-center font-bold flex items-center justify-center gap-2">
+        <span class="bg-brand-yellow text-gray-900 text-[10px] uppercase font-extrabold px-2 py-0.5 rounded-full">OPEN PO JASTIP</span>
+        <span>Jastip Mie Gacoan Omben & Sekitarnya • Bayar Cepat Pakai QRIS!</span>
+    </div>
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b-4 border-brand-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 bg-gradient-to-tr from-brand-brightyellow to-brand-yellow rounded-2xl flex items-center justify-center text-brand-darkgreen text-2xl font-black shadow-md transform group-hover:scale-105 transition">
+                        <i class="fa-solid fa-bowl-food"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-2xl font-black font-heading tracking-tight text-brand-darkgreen">jastipin<span class="text-brand-brightyellow">bian</span></span>
+                        <span class="text-[10px] font-extrabold text-gray-500 tracking-wider uppercase">Mie Gacoan Express Omben</span>
+                    </div>
+                </a>
+
+                <!-- Nav Info Badges & Action -->
+                <div class="flex items-center gap-4">
+                    <div class="hidden md:flex items-center gap-6 text-xs font-semibold text-gray-600 border-r border-gray-200 pr-6">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-motorcycle text-brand-green text-base"></i>
+                            <span>Antar Langsung ke Rumah</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-qrcode text-brand-darkgreen text-base"></i>
+                            <span>QRIS Instant Pay</span>
+                        </div>
+                    </div>
+
+                    <!-- Cart Toggle Button -->
+                    <button onclick="toggleCartModal()" class="relative bg-brand-green hover:bg-brand-darkgreen text-white font-bold px-4 py-2.5 rounded-2xl transition flex items-center gap-2 shadow-md">
+                        <i class="fa-solid fa-cart-shopping text-base"></i>
+                        <span class="hidden sm:inline">Keranjang</span>
+                        <span id="cartCountBadge" class="bg-brand-yellow text-gray-900 text-xs font-black w-6 h-6 rounded-full flex items-center justify-center">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        
+        <!-- Hero Banner -->
+        <section class="relative bg-gradient-to-br from-brand-yellow via-amber-300 to-brand-brightyellow py-10 lg:py-14 overflow-hidden border-b border-amber-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-5 text-center lg:text-left">
+                        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-md px-3.5 py-1.5 rounded-full text-xs font-bold text-brand-darkgreen shadow-sm">
+                            <i class="fa-solid fa-fire text-red-600"></i> Solusi Ngidam Mie Gacoan Tanpa Antri Di Omben!
+                        </div>
+                        <h1 class="text-3xl sm:text-5xl font-black font-heading text-gray-900 leading-tight">
+                            Nikmati <span class="text-brand-darkgreen underline decoration-white">Mie Gacoan</span> Hangat Langsung Di Omben!
+                        </h1>
+                        <p class="text-gray-800 text-sm sm:text-base font-medium max-w-xl mx-auto lg:mx-0">
+                            Pesan menu favoritmu di <strong>jastipinbian</strong>. Kami belikan & antarkan langsung dengan aman. Pembayaran praktis via <strong>QRIS</strong> & konfirmasi WhatsApp otomatis!
+                        </p>
+                        
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 pt-2">
+                            <a href="#menu-section" class="bg-brand-green hover:bg-brand-darkgreen text-white font-extrabold px-6 py-3.5 rounded-2xl shadow-lg transition flex items-center gap-2 text-sm">
+                                <i class="fa-solid fa-utensils"></i> Pilih Menu Sekarang
+                            </a>
+                            <a href="#cara-kerja" class="bg-white hover:bg-amber-50 text-gray-800 font-bold px-6 py-3.5 rounded-2xl shadow transition text-sm">
+                                <i class="fa-solid fa-circle-info text-brand-green"></i> Cara Pesan
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Info Card -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-white rounded-3xl p-6 shadow-xl border-4 border-white space-y-4">
+                            <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+                                <span class="font-black text-brand-darkgreen font-heading text-lg">Info Jastip Hari Ini</span>
+                                <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Buka Order
+                                </span>
+                            </div>
+
+                            <div class="space-y-3 text-xs sm:text-sm">
+                                <div class="flex items-center justify-between bg-amber-50 p-3 rounded-xl border border-amber-200/60">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-truck-ramp-box text-brand-darkgreen text-lg"></i>
+                                        <div>
+                                            <p class="font-bold text-gray-800">Biaya Jastip (Ongkir Omben)</p>
+                                            <p class="text-gray-500 text-xs">Mulai dari Rp 8.000 / alamat</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-extrabold text-brand-darkgreen">Murah!</span>
+                                </div>
+
+                                <div class="flex items-center justify-between bg-green-50 p-3 rounded-xl border border-green-200/60">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-solid fa-qrcode text-brand-green text-lg"></i>
+                                        <div>
+                                            <p class="font-bold text-gray-800">Metode Pembayaran</p>
+                                            <p class="text-gray-500 text-xs">Scan QRIS (BCA, GoPay, Dana, ShopeePay, dll)</p>
+                                        </div>
+                                    </div>
+                                    <span class="font-extrabold text-brand-green">QRIS Ready</span>
+                                </div>
+
+                                <div class="flex items-center justify-between bg-blue-50 p-3 rounded-xl border border-blue-200/60">
+                                    <div class="flex items-center gap-3">
+                                        <i class="fa-brands fa-whatsapp text-green-600 text-lg"></i>
+                                        <div>
+                                            <p class="font-bold text-gray-800">Admin WhatsApp</p>
+                                            <p class="text-gray-500 text-xs">083654789543</p>
+                                        </div>
+                                    </div>
+                                    <a href="https://wa.me/6283654789543" target="_blank" class="text-xs font-bold text-blue-600 underline">Chat Admin</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Menu Catalog Section -->
+        <section id="menu-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                <div>
+                    <span class="text-xs font-black tracking-widest text-brand-darkgreen uppercase bg-brand-lightgreen px-3 py-1 rounded-full">Katalog Menu Gacoan</span>
+                    <h2 class="text-2xl sm:text-3xl font-black font-heading text-gray-900 mt-2">
+                        Mau Pesan Apa Hari Ini? 🍜
+                    </h2>
+                </div>
+
+                <!-- Category Tabs -->
+                <div class="flex flex-wrap gap-2" id="categoryButtons">
+                    <button onclick="filterCategory('all')" class="cat-btn active bg-brand-green text-white font-bold px-4 py-2 rounded-2xl text-xs sm:text-sm transition shadow-sm">
+                        Semua Menu
+                    </button>
+                    <button onclick="filterCategory('mie')" class="cat-btn bg-white text-gray-700 hover:bg-amber-100 font-bold px-4 py-2 rounded-2xl text-xs sm:text-sm transition border border-gray-200">
+                        🍜 Mie Pedas
+                    </button>
+                    <button onclick="filterCategory('dimsum')" class="cat-btn bg-white text-gray-700 hover:bg-amber-100 font-bold px-4 py-2 rounded-2xl text-xs sm:text-sm transition border border-gray-200">
+                        🥟 Dimsum
+                    </button>
+                    <button onclick="filterCategory('minuman')" class="cat-btn bg-white text-gray-700 hover:bg-amber-100 font-bold px-4 py-2 rounded-2xl text-xs sm:text-sm transition border border-gray-200">
+                        🥤 Minuman
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu Cards Grid -->
+            <div id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- JavaScript will populate menu items here -->
+            </div>
+
+        </section>
+
+        <!-- Cara Kerja Section -->
+        <section id="cara-kerja" class="bg-white py-12 border-y border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="text-xs font-black uppercase tracking-wider text-brand-darkgreen bg-brand-lightgreen px-3 py-1 rounded-full">Mudah & Cepat</span>
+                    <h2 class="text-2xl font-black font-heading text-gray-900 mt-2">4 Langkah Jastip di Jastipinbian</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="bg-amber-50/70 p-6 rounded-3xl border border-amber-200/80 text-center relative">
+                        <div class="w-12 h-12 bg-brand-yellow text-gray-900 font-black rounded-2xl flex items-center justify-center text-xl mx-auto mb-4 shadow">1</div>
+                        <h3 class="font-bold text-gray-900 text-base mb-1">Pilih Menu</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">Pilih Mie Gacoan, Dimsum, atau Minuman & atur level pedas sesuai selera.</p>
+                    </div>
+
+                    <div class="bg-green-50/70 p-6 rounded-3xl border border-green-200/80 text-center relative">
+                        <div class="w-12 h-12 bg-brand-green text-white font-black rounded-2xl flex items-center justify-center text-xl mx-auto mb-4 shadow">2</div>
+                        <h3 class="font-bold text-gray-900 text-base mb-1">Bayar Pakai QRIS</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">Scan QRIS menggunakan mobile banking / e-wallet favoritmu secara instan.</p>
+                    </div>
+
+                    <div class="bg-amber-50/70 p-6 rounded-3xl border border-amber-200/80 text-center relative">
+                        <div class="w-12 h-12 bg-brand-yellow text-gray-900 font-black rounded-2xl flex items-center justify-center text-xl mx-auto mb-4 shadow">3</div>
+                        <h3 class="font-bold text-gray-900 text-base mb-1">Kirim Nota ke WA</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">Sistem otomatis meneruskan rincian pesananmu ke Admin <strong>083654789543</strong>.</p>
+                    </div>
+
+                    <div class="bg-green-50/70 p-6 rounded-3xl border border-green-200/80 text-center relative">
+                        <div class="w-12 h-12 bg-brand-green text-white font-black rounded-2xl flex items-center justify-center text-xl mx-auto mb-4 shadow">4</div>
+                        <h3 class="font-bold text-gray-900 text-base mb-1">Duduk Manis</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed">Driver kami akan membelikan Mie Gacoan & mengantarkan sampai depan rumah di Omben!</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Area Coverage Banner -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div class="bg-gradient-to-r from-brand-darkgreen to-brand-green text-white rounded-3xl p-6 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 text-center md:text-left">
+                    <h3 class="text-xl sm:text-2xl font-black font-heading">Melayani Pengiriman Seluruh Area Omben</h3>
+                    <p class="text-green-100 text-xs sm:text-sm max-w-xl">
+                        Pasar Omben, Sogian, Angsok, Rapa Laok, Napo Daya, Kebun Sareh, & desa sekitarnya di Kecamatan Omben, Sampang.
+                    </p>
+                </div>
+                <button onclick="toggleCartModal()" class="bg-brand-yellow hover:bg-brand-brightyellow text-gray-900 font-black px-6 py-3.5 rounded-2xl text-sm transition shadow-lg whitespace-nowrap">
+                    Pesan Jastip Sekarang <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-10 pb-6 border-t-4 border-brand-yellow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 pb-8 border-b border-gray-800">
+                
+                <div>
+                    <div class="flex items-center gap-2 mb-3">
+                        <div class="w-8 h-8 bg-brand-yellow text-gray-900 rounded-lg flex items-center justify-center font-black">
+                            <i class="fa-solid fa-bowl-food"></i>
+                        </div>
+                        <span class="text-xl font-black font-heading text-white">jastipin<span class="text-brand-yellow">bian</span></span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">
+                        Layanan Jasa Titip (Jastip) kuliner Mie Gacoan tepercaya untuk daerah Omben dan sekitarnya. Pengiriman cepat, pesanan hangat, pembayaran aman QRIS.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold uppercase text-brand-yellow mb-3">Kontak & Operasional</h4>
+                    <ul class="space-y-2 text-xs text-gray-400">
+                        <li class="flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-brand-green text-sm"></i>
+                            <span>WhatsApp: <strong>083654789543</strong></span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-brand-yellow"></i>
+                            <span>Jam Buka PO: 09.00 - 20.00 WIB</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-red-500"></i>
+                            <span>Coverage: Omben, Sampang, Madura</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold uppercase text-brand-yellow mb-3">Metode Pembayaran</h4>
+                    <p class="text-xs text-gray-400 mb-3">Menerima pembayaran resmi via QRIS dari semua Bank dan E-Wallet (BCA, BRI, Mandiri, Dana, GoPay, OVO, ShopeePay).</p>
+                    <div class="inline-flex items-center gap-2 bg-white/10 px-3 py-1.5 rounded-xl border border-white/20 text-xs font-bold text-yellow-300">
+                        <i class="fa-solid fa-qrcode text-sm"></i> Dynamic QRIS Supported
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="text-center text-xs text-gray-500">
+                &copy; <span id="year"></span> <strong>jastipinbian</strong> Omben. Managed with ❤️ for Gacoan Lovers.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart & Checkout Floating Mobile Bar -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-3 shadow-2xl z-30 lg:hidden flex items-center justify-between">
+        <div>
+            <span class="text-[10px] text-gray-500 block">Total Estimasi (+Jastip)</span>
+            <span id="mobileTotalText" class="text-lg font-black text-brand-darkgreen">Rp 0</span>
+        </div>
+        <button onclick="toggleCartModal()" class="bg-brand-green hover:bg-brand-darkgreen text-white font-extrabold px-5 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow">
+            <i class="fa-solid fa-basket-shopping"></i> Lihat Keranjang (<span id="mobileCartCount">0</span>)
+        </button>
+    </div>
+
+    <!-- CART & CHECKOUT SLIDE-OVER MODAL -->
+    <div id="cartModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex justify-end">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between overflow-hidden transform transition-all duration-300">
+            
+            <!-- Cart Header -->
+            <div class="p-5 bg-gradient-to-r from-brand-darkgreen to-brand-green text-white flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-bag-shopping text-xl text-brand-yellow"></i>
+                    <h3 class="font-black font-heading text-lg">Keranjang Jastip</h3>
+                </div>
+                <button onclick="toggleCartModal()" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Body / Items List -->
+            <div id="cartItemsContainer" class="flex-grow p-5 overflow-y-auto custom-scrollbar space-y-4">
+                <!-- Dynamic Items Inserted via JS -->
+            </div>
+
+            <!-- Cart Checkout Form & Summary Footer -->
+            <div class="p-5 bg-amber-50/80 border-t border-amber-200 space-y-4">
+                
+                <!-- Delivery & Customer Details -->
+                <div class="space-y-2 text-xs">
+                    <label class="block font-bold text-gray-800 uppercase">Detail Pemesan (Area Omben)</label>
+                    <input type="text" id="custName" placeholder="Nama Lengkap Pemesan" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-green focus:outline-none bg-white">
+                    <input type="text" id="custAddress" placeholder="Alamat Detail (cth: Desa Sogian RT 02 / Dekat Masjid Omben)" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-green focus:outline-none bg-white">
+                    <textarea id="custNotes" rows="2" placeholder="Catatan Tambahan (misal: bungkus terpisah, saus diperbanyak, dll)" class="w-full px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-green focus:outline-none bg-white"></textarea>
+                </div>
+
+                <!-- Bill Calculation -->
+                <div class="space-y-1.5 text-xs text-gray-600 border-t border-amber-200/80 pt-3">
+                    <div class="flex justify-between">
+                        <span>Subtotal Makanan/Minuman:</span>
+                        <span id="summarySubtotal" class="font-bold text-gray-800">Rp 0</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Flat Jastip & Ongkir Omben:</span>
+                        <span id="summaryFee" class="font-bold text-gray-800">Rp 10.000</span>
+                    </div>
+                    <div class="flex justify-between text-sm font-black text-brand-darkgreen pt-1 border-t border-dashed border-gray-300">
+                        <span>TOTAL BAYAR:</span>
+                        <span id="summaryGrandTotal" class="text-base text-brand-green">Rp 10.000</span>
+                    </div>
+                </div>
+
+                <!-- Action Button -->
+                <button onclick="proceedToQRIS()" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-extrabold py-3.5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 text-sm pulse-btn">
+                    <i class="fa-solid fa-qrcode text-lg text-brand-yellow"></i>
+                    Bayar QRIS & Order ke WA
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- QRIS PAYMENT MODAL -->
+    <div id="qrisModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl relative text-center border-4 border-brand-yellow max-h-[90vh] overflow-y-auto custom-scrollbar">
+            
+            <button onclick="closeQRISModal()" class="absolute top-4 right-4 w-8 h-8 bg-gray-100 hover:bg-gray-200 text-gray-600 rounded-full flex items-center justify-center text-sm">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- QRIS Brand Header -->
+            <div class="mb-4">
+                <span class="bg-brand-lightgreen text-brand-darkgreen text-[10px] font-black uppercase px-3 py-1 rounded-full">Sistem Pembayaran Resmi</span>
+                <h3 class="text-xl font-black font-heading text-gray-900 mt-1">Pembayaran QRIS</h3>
+                <p class="text-xs text-gray-500">jastipinbian - Area Omben</p>
+            </div>
+
+            <!-- Dynamic QR Code Container -->
+            <div class="bg-gray-50 p-4 rounded-2xl border-2 border-dashed border-gray-300 inline-block mb-3 relative">
+                <!-- QR Code Display -->
+                <svg class="w-48 h-48 mx-auto" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="100" height="100" fill="white"/>
+                    <!-- QR Corners -->
+                    <rect x="5" y="5" width="25" height="25" fill="#15803D"/>
+                    <rect x="9" y="9" width="17" height="17" fill="white"/>
+                    <rect x="13" y="13" width="9" height="9" fill="#15803D"/>
+                    
+                    <rect x="70" y="5" width="25" height="25" fill="#15803D"/>
+                    <rect x="74" y="9" width="17" height="17" fill="white"/>
+                    <rect x="78" y="13" width="9" height="9" fill="#15803D"/>
+
+                    <rect x="5" y="70" width="25" height="25" fill="#15803D"/>
+                    <rect x="9" y="74" width="17" height="17" fill="white"/>
+                    <rect x="13" y="78" width="9" height="9" fill="#15803D"/>
+
+                    <!-- Mock QR Modules -->
+                    <rect x="35" y="10" width="5" height="5" fill="#111827"/>
+                    <rect x="45" y="10" width="10" height="5" fill="#111827"/>
+                    <rect x="35" y="20" width="15" height="5" fill="#111827"/>
+                    <rect x="55" y="20" width="5" height="5" fill="#111827"/>
+                    <rect x="40" y="30" width="5" height="10" fill="#111827"/>
+                    <rect x="10" y="35" width="10" height="5" fill="#111827"/>
+                    <rect x="25" y="35" width="10" height="10" fill="#111827"/>
+
+                    <rect x="50" y="40" width="20" height="5" fill="#111827"/>
+                    <rect x="75" y="35" width="15" height="5" fill="#111827"/>
+                    <rect x="85" y="45" width="5" height="15" fill="#111827"/>
+                    <rect x="65" y="50" width="10" height="10" fill="#111827"/>
+
+                    <rect x="35" y="65" width="10" height="10" fill="#111827"/>
+                    <rect x="50" y="60" width="5" height="20" fill="#111827"/>
+                    <rect x="60" y="75" width="15" height="5" fill="#111827"/>
+                    <rect x="80" y="70" width="10" height="15" fill="#111827"/>
+                    <rect x="35" y="85" width="20" height="5" fill="#111827"/>
+                    <rect x="60" y="85" width="25" height="5" fill="#111827"/>
+                    
+                    <!-- Center Logo Tag -->
+                    <rect x="40" y="40" width="20" height="20" rx="4" fill="#FACC15"/>
+                    <text x="50" y="53" font-family="Arial" font-size="8" font-weight="bold" fill="#15803D" text-anchor="middle">QRIS</text>
+                </svg>
+
+                <div class="mt-2 text-[11px] font-bold text-gray-600">
+                    NMS: <span class="text-brand-darkgreen">JASTIPINBIAN OMBEN</span>
+                </div>
+            </div>
+
+            <!-- Total Amount Info -->
+            <div class="bg-amber-100 p-3 rounded-2xl mb-4">
+                <span class="text-[11px] text-gray-600 block">Total Transfer QRIS</span>
+                <span id="qrisGrandTotal" class="text-2xl font-black text-brand-darkgreen">Rp 0</span>
+                <p class="text-[10px] text-gray-500 mt-0.5">*Sudah termasuk item + Jastip Omben</p>
+            </div>
+
+            <!-- Confirmation Action -->
+            <div class="space-y-2">
+                <button onclick="sendOrderToWhatsApp()" class="w-full bg-green-600 hover:bg-green-700 text-white font-extrabold py-3.5 rounded-2xl shadow-lg transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    Konfirmasi Pembayaran di WA
+                </button>
+                <p class="text-[10px] text-gray-400">
+                    Setelah melakukan scan QRIS, klik tombol hijau di atas untuk mengirim rincian & bukti bayar ke WA Admin <strong>083654789543</strong>.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-24 right-4 bg-gray-900 text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-2xl z-50 transform translate-x-full transition-transform duration-300 flex items-center gap-2 border border-gray-700">
+        <i class="fa-solid fa-circle-check text-brand-yellow text-base"></i>
+        <span id="toastMsg">Pesanan ditambahkan!</span>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Set dynamic year
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Admin WhatsApp Target
+        const ADMIN_WA = "6283654789543";
+        const JASTIP_FEE = 10000; // Flat jastip fee for Omben area
+
+        // Menu Data Gacoan
+        const menuData = [
+            {
+                id: 'm1',
+                name: 'Mie Hompimpa',
+                category: 'mie',
+                price: 11000,
+                desc: 'Mie gurih asin pedas rasa original dengan taburan ayam cincang & kerupuk pangsit.',
+                icon: '🍜',
+                hasLevel: true,
+                badge: 'FAVORIT'
+            },
+            {
+                id: 'm2',
+                name: 'Mie Gacoan',
+                category: 'mie',
+                price: 11000,
+                desc: 'Mie manis pedas gurih dengan bumbu kecap spesial khas Gacoan & kerupuk pangsit.',
+                icon: '🔥',
+                hasLevel: true,
+                badge: 'BEST SELLER'
+            },
+            {
+                id: 'm3',
+                name: 'Mie Suit',
+                category: 'mie',
+                price: 11000,
+                desc: 'Mie gurih tidak pedas (0 cabe), sangat cocok untuk anak-anak / yang tak suka pedas.',
+                icon: '✨',
+                hasLevel: false,
+                badge: 'KID FRIENDLY'
+            },
+            {
+                id: 'd1',
+                name: 'Pangsit Goreng (Isi 3)',
+                category: 'dimsum',
+                price: 11000,
+                desc: 'Pangsit goreng renyah isi olahan ayam udang gurih melimpah.',
+                icon: '🥟',
+                hasLevel: false,
+                badge: 'POPULER'
+            },
+            {
+                id: 'd2',
+                name: 'Udang Keju (Isi 3)',
+                category: 'dimsum',
+                price: 11000,
+                desc: 'Dimsum olahan udang berlapis keju meleleh di dalam. Crunchy & gurih!',
+                icon: '🧀',
+                hasLevel: false,
+                badge: 'MUST TRY'
+            },
+            {
+                id: 'd3',
+                name: 'Udang Rambutan (Isi 3)',
+                category: 'dimsum',
+                price: 11000,
+                desc: 'Bola udang dilapisi olahan kulit renyah menyerupai rambutan.',
+                icon: '🍤',
+                hasLevel: false,
+                badge: 'BEST SELLER'
+            },
+            {
+                id: 'd4',
+                name: 'Siomay (Isi 3)',
+                category: 'dimsum',
+                price: 10000,
+                desc: 'Siomay lembut kukus dengan bahan dasar olahan ayam & udang segar.',
+                icon: '🍥',
+                hasLevel: false,
+                badge: ''
+            },
+            {
+                id: 'dr1',
+                name: 'Es Gobak Sodor',
+                category: 'minuman',
+                price: 10000,
+                desc: 'Es buah segar kombinasi cincau, jelly, dan potongan buah manis.',
+                icon: '🥤',
+                hasLevel: false,
+                badge: 'SEGAR'
+            },
+            {
+                id: 'dr2',
+                name: 'Es Teklek',
+                category: 'minuman',
+                price: 7500,
+                desc: 'Es susu segar khas Gacoan dengan rasa manis pas pelepas dahaga.',
+                icon: '🧃',
+                hasLevel: false,
+                badge: ''
+            },
+            {
+                id: 'dr3',
+                name: 'Es Sluku Bathok',
+                category: 'minuman',
+                price: 7500,
+                desc: 'Minuman dingin kesegaran rasa buah dengan topping jeli nikmat.',
+                icon: '🍹',
+                hasLevel: false,
+                badge: ''
+            },
+            {
+                id: 'dr4',
+                name: 'Es Teh Manis',
+                category: 'minuman',
+                price: 5000,
+                desc: 'Es teh jumbo segar pendamping pas santapan pedas Mie Gacoan.',
+                icon: '🧊',
+                hasLevel: false,
+                badge: 'JUMBO'
+            }
+        ];
+
+        // State Store
+        let cart = [];
+        let currentFilter = 'all';
+
+        // Render Menu Catalog
+        function renderMenu() {
+            const grid = document.getElementById('menuGrid');
+            grid.innerHTML = '';
+
+            const itemsToDisplay = menuData.filter(item => {
+                if (currentFilter === 'all') return true;
+                return item.category === currentFilter;
+            });
+
+            itemsToDisplay.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-3xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-xl transition duration-300 flex flex-col justify-between group";
+
+                let levelSelectHtml = '';
+                if (item.hasLevel) {
+                    levelSelectHtml = `
+                        <div class="mt-3">
+                            <label class="block text-[11px] font-bold text-gray-600 mb-1">Level Pedas:</label>
+                            <select id="level-${item.id}" class="w-full text-xs font-bold bg-amber-50 border border-amber-300 rounded-xl px-2.5 py-1.5 text-gray-800 focus:outline-none focus:ring-2 focus:ring-brand-green">
+                                <option value="Level 1">Level 1 (Pedas Manis/Gurih Pas)</option>
+                                <option value="Level 2">Level 2 (Pedas Sedang)</option>
+                                <option value="Level 3">Level 3 (Pedas Mantap)</option>
+                                <option value="Level 4">Level 4 (Pedas Banget)</option>
+                                <option value="Level 6">Level 6 (Pedas Ekstrem)</option>
+                                <option value="Level 8">Level 8 (Maksimal Hot)</option>
+                            </select>
+                        </div>
+                    `;
+                }
+
+                card.innerHTML = `
+                    <div class="p-5">
+                        <div class="flex items-start justify-between gap-2 mb-2">
+                            <div class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center text-2xl shadow-inner">
+                                ${item.icon}
+                            </div>
+                            ${item.badge ? `<span class="bg-brand-yellow text-gray-900 text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-sm">${item.badge}</span>` : ''}
+                        </div>
+
+                        <h3 class="font-bold text-gray-900 text-lg leading-snug group-hover:text-brand-green transition">${item.name}</h3>
+                        <p class="text-xs text-gray-500 mt-1 leading-relaxed">${item.desc}</p>
+                        
+                        ${levelSelectHtml}
+                    </div>
+
+                    <div class="p-5 pt-0 border-t border-gray-100 mt-2">
+                        <div class="flex items-center justify-between pt-3 mb-3">
+                            <span class="text-[10px] text-gray-400 block uppercase font-bold">Harga Menu</span>
+                            <span class="text-lg font-black text-brand-darkgreen">Rp ${item.price.toLocaleString('id-ID')}</span>
+                        </div>
+
+                        <button onclick="addToCart('${item.id}')" class="w-full bg-brand-green hover:bg-brand-darkgreen text-white font-bold py-2.5 rounded-2xl transition text-xs flex items-center justify-center gap-2 shadow">
+                            <i class="fa-solid fa-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </div>
+                `;
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Category Filter Toggle
+        function filterCategory(cat) {
+            currentFilter = cat;
+            const buttons = document.querySelectorAll('.cat-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-green', 'text-white');
+                btn.classList.add('bg-white', 'text-gray-700');
+            });
+
+            event.currentTarget.classList.remove('bg-white', 'text-gray-700');
+            event.currentTarget.classList.add('bg-brand-green', 'text-white');
+
+            renderMenu();
+        }
+
+        // Add to Cart Handler
+        function addToCart(itemId) {
+            const item = menuData.find(m => m.id === itemId);
+            if (!item) return;
+
+            let selectedLevel = '-';
+            if (item.hasLevel) {
+                const levelElem = document.getElementById(`level-${itemId}`);
+                if (levelElem) selectedLevel = levelElem.value;
+            }
+
+            // Check if item with same level exists
+            const existingIndex = cart.findIndex(c => c.id === itemId && c.level === selectedLevel);
+
+            if (existingIndex > -1) {
+                cart[existingIndex].qty += 1;
+            } else {
+                cart.push({
+                    id: item.id,
+                    name: item.name,
+                    price: item.price,
+                    level: selectedLevel,
+                    icon: item.icon,
+                    qty: 1
+                });
+            }
+
+            updateCartUI();
+            showToast(`"${item.name}" ditambahkan!`);
+        }
+
+        // Update Cart Elements & Badges
+        function updateCartUI() {
+            const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const grandTotal = subtotal > 0 ? (subtotal + JASTIP_FEE) : 0;
+
+            // Badges
+            document.getElementById('cartCountBadge').textContent = totalQty;
+            document.getElementById('mobileCartCount').textContent = totalQty;
+            document.getElementById('mobileTotalText').textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+
+            // Cart Modal Elements
+            document.getElementById('summarySubtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            document.getElementById('summaryFee').textContent = subtotal > 0 ? `Rp ${JASTIP_FEE.toLocaleString('id-ID')}` : 'Rp 0';
+            document.getElementById('summaryGrandTotal').textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+
+            // Render Items in Modal
+            const container = document.getElementById('cartItemsContainer');
+            container.innerHTML = '';
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400 space-y-3">
+                        <i class="fa-solid fa-basket-shopping text-5xl text-amber-200"></i>
+                        <p class="text-sm font-semibold text-gray-600">Keranjang Jastip Masih Kosong</p>
+                        <p class="text-xs">Yuk pilih mie gacoan & dimsum favoritmu dulu!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cart.forEach((cItem, index) => {
+                const itemRow = document.createElement('div');
+                itemRow.className = "flex items-center justify-between bg-amber-50/50 p-3 rounded-2xl border border-amber-200/60";
+                
+                itemRow.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">${cItem.icon}</span>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-xs sm:text-sm">${cItem.name}</h4>
+                            ${cItem.level !== '-' ? `<span class="text-[10px] bg-amber-200 text-amber-900 font-bold px-2 py-0.5 rounded-full inline-block mt-0.5">${cItem.level}</span>` : ''}
+                            <span class="text-xs text-brand-darkgreen font-bold block mt-0.5">Rp ${(cItem.price * cItem.qty).toLocaleString('id-ID')}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <button onclick="changeQty(${index}, -1)" class="w-7 h-7 bg-white hover:bg-gray-100 text-gray-700 rounded-xl font-bold border border-gray-300 flex items-center justify-center text-xs">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span class="font-extrabold text-xs w-5 text-center">${cItem.qty}</span>
+                        <button onclick="changeQty(${index}, 1)" class="w-7 h-7 bg-brand-green hover:bg-brand-darkgreen text-white rounded-xl font-bold flex items-center justify-center text-xs">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(itemRow);
+            });
+        }
+
+        // Change Cart Item Quantity
+        function changeQty(index, delta) {
+            if (cart[index]) {
+                cart[index].qty += delta;
+                if (cart[index].qty <= 0) {
+                    cart.splice(index, 1);
+                }
+                updateCartUI();
+            }
+        }
+
+        // Modal Toggles
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function closeQRISModal() {
+            document.getElementById('qrisModal').classList.add('hidden');
+        }
+
+        // Proceed to QRIS Step
+        function proceedToQRIS() {
+            const name = document.getElementById('custName').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+
+            if (cart.length === 0) {
+                alert("Keranjang masih kosong! Silakan pilih menu Mie Gacoan dulu.");
+                return;
+            }
+
+            if (!name || !address) {
+                alert("Mohon isi Nama Pemesan dan Alamat Lengkap di Omben.");
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const grandTotal = subtotal + JASTIP_FEE;
+
+            document.getElementById('qrisGrandTotal').textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+            document.getElementById('qrisModal').classList.remove('hidden');
+        }
+
+        // Toast Notification Trigger
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = message;
+            toast.classList.remove('translate-x-full');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 2500);
+        }
+
+        // Send Finalized Order to WhatsApp
+        function sendOrderToWhatsApp() {
+            const name = document.getElementById('custName').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const notes = document.getElementById('custNotes').value.trim() || 'Tidak ada';
+
+            const subtotal = cart.reduce((sum, i) => sum + (i.price * i.qty), 0);
+            const grandTotal = subtotal + JASTIP_FEE;
+
+            let orderItemsText = "";
+            cart.forEach((item, idx) => {
+                orderItemsText += `${idx + 1}. *${item.name}* ${item.level !== '-' ? '(' + item.level + ')' : ''}%0A   └ ${item.qty}x @ Rp ${item.price.toLocaleString('id-ID')} = Rp ${(item.price * item.qty).toLocaleString('id-ID')}%0A`;
+            });
+
+            const waText = 
+                `*HALO JASTIPINBIAN, SAYA MAU ORDER MIE GACOAN!*%0A%0A` +
+                `📋 *DATA PEMESAN:*%0A` +
+                `• Nama: ${encodeURIComponent(name)}%0A` +
+                `• Alamat (Omben): ${encodeURIComponent(address)}%0A` +
+                `• Catatan: ${encodeURIComponent(notes)}%0A%0A` +
+                `🍜 *RINCIAN PESANAN:*%0A${orderItemsText}%0A` +
+                `💳 *RINCIAN PEMBAYARAN:*%0A` +
+                `• Subtotal Menu: Rp ${subtotal.toLocaleString('id-ID')}%0A` +
+                `• Ongkir & Jastip Omben: Rp ${JASTIP_FEE.toLocaleString('id-ID')}%0A` +
+                `• *TOTAL BAYAR (QRIS): Rp ${grandTotal.toLocaleString('id-ID')}*%0A%0A` +
+                `✅ *STATUS:* Sudah Scan QRIS / Siap Kirim Bukti Transfer. Mohon Diproses Ya Min!`;
+
+            window.open(`https://wa.me/${ADMIN_WA}?text=${waText}`, '_blank');
+        }
+
+        // Initialize App
+        window.onload = function() {
+            renderMenu();
+            updateCartUI();
+        };
+    </script>
+</body>
+</html>
